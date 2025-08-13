@@ -10,20 +10,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Slate Gray, Sky Blue, and White -->
-    <!-- Application Structure Plan: A single-page narrative portfolio. The structure flows from a high-level summary to an interactive career timeline, a visual skills assessment, and concrete project examples. This non-linear but guided structure allows recruiters to quickly grasp the key value proposition (career transition + modern tech stack) while also enabling deep dives into specific areas of interest (timeline, projects). It's designed for exploration, not just reading. -->
-    <!-- Visualization & Content Choices: Experience -> Interactive Timeline (HTML/JS) to show growth over time. Skills -> Radar Chart (Chart.js) for a quick, multi-dimensional view of core competencies, supplemented by tagged lists for detail. Projects -> Card layout (HTML/Tailwind) for clear, digestible case studies. This mix of text and interactive visuals tells a more compelling story than a static document. -->
+    <!-- Application Structure Plan: A single-page narrative portfolio. The structure flows from a high-level summary to an interactive career timeline, a visual skills assessment, and concrete project examples. The new AI Assistant section allows for direct, dynamic interaction with the portfolio's content. This non-linear but guided structure allows recruiters to quickly grasp the key value proposition (career transition + modern tech stack) while also enabling deep dives into specific areas of interest (timeline, projects, Q&A). It's designed for exploration, not just reading. -->
+    <!-- Visualization & Content Choices: Experience -> Interactive Timeline (HTML/JS) to show growth over time. Skills -> Radar Chart (Chart.js) for a quick, multi-dimensional view of core competencies, supplemented by tagged lists for detail. Projects -> Card layout (HTML/Tailwind) for clear, digestible case studies. AI Assistant -> Textarea and button triggering an LLM call to provide personalized answers based on the portfolio's content. This mix of text and interactive visuals tells a more compelling story than a static document. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-            color: #334155; /* slate-700 */
+            background-color: #f8fafc;
+            color: #334155;
         }
         .nav-link {
             transition: color 0.3s ease;
         }
         .nav-link.active {
-            color: #0ea5e9; /* sky-500 */
+            color: #0ea5e9;
             font-weight: 700;
         }
         .timeline-item::before {
@@ -35,12 +35,12 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background-color: #cbd5e1; /* slate-300 */
-            border: 4px solid #f8fafc; /* slate-50 */
+            background-color: #cbd5e1;
+            border: 4px solid #f8fafc;
             transition: background-color 0.3s ease;
         }
         .timeline-item.active::before {
-            background-color: #0ea5e9; /* sky-500 */
+            background-color: #0ea5e9;
         }
         .chart-container {
             position: relative;
@@ -63,6 +63,7 @@
                 <a href="#jornada" class="nav-link text-slate-600 hover:text-sky-500">Jornada</a>
                 <a href="#competencias" class="nav-link text-slate-600 hover:text-sky-500">Competências</a>
                 <a href="#projetos" class="nav-link text-slate-600 hover:text-sky-500">Projetos</a>
+                <a href="#ia" class="nav-link text-slate-600 hover:text-sky-500">Assistente de IA</a>
                 <a href="#contato" class="nav-link text-slate-600 hover:text-sky-500">Contato</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-slate-800">
@@ -74,6 +75,7 @@
             <a href="#jornada" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Jornada</a>
             <a href="#competencias" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Competências</a>
             <a href="#projetos" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Projetos</a>
+            <a href="#ia" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Assistente de IA</a>
             <a href="#contato" class="block py-2 px-6 text-slate-600 hover:bg-slate-100">Contato</a>
         </div>
     </header>
@@ -139,6 +141,28 @@
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Project cards will be injected by JS -->
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section id="ia" class="py-20 bg-slate-100 rounded-xl shadow-inner">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl font-bold text-slate-800">Assistente de IA ✨</h3>
+                <p class="text-slate-500 mt-2 max-w-2xl mx-auto">
+                    Faça uma pergunta sobre minha experiência, projetos ou competências, e um assistente de IA irá gerar uma resposta com base neste portfólio.
+                </p>
+            </div>
+            <div class="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg">
+                <textarea id="ia-input" class="w-full h-24 p-4 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none text-slate-700" placeholder="Ex: Me fale mais sobre seu projeto de automação com Python."></textarea>
+                <button id="ia-button" class="mt-4 w-full bg-sky-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-sky-600 transition-colors transform hover:scale-105">
+                    Gerar Resposta ✨
+                </button>
+                <div id="ia-response" class="mt-6 p-4 border border-sky-200 bg-sky-50 rounded-lg text-slate-700 hidden">
+                    <div id="ia-loading" class="text-center hidden">
+                        <p class="text-sky-600">Gerando resposta...</p>
+                    </div>
+                    <p id="ia-text"></p>
+                </div>
             </div>
         </section>
         
@@ -263,6 +287,67 @@
             }
         ];
 
+        const iaSection = document.getElementById('ia');
+        const iaInput = document.getElementById('ia-input');
+        const iaButton = document.getElementById('ia-button');
+        const iaResponse = document.getElementById('ia-response');
+        const iaLoading = document.getElementById('ia-loading');
+        const iaText = document.getElementById('ia-text');
+
+        iaButton.addEventListener('click', async () => {
+            const userPrompt = iaInput.value.trim();
+            if (!userPrompt) {
+                alert('Por favor, digite sua pergunta.');
+                return;
+            }
+
+            iaResponse.classList.remove('hidden');
+            iaText.textContent = '';
+            iaLoading.classList.remove('hidden');
+            iaButton.disabled = true;
+
+            const fullContext = `
+                Você é Ghabryel Carvalho, um profissional de dados e desenvolvedor de automação.
+                Sua experiência e habilidades estão descritas no seguinte portfólio:
+                - Resumo: Profissional de Dados em ascensão, com uma trajetória de sucesso na transição de atendimento ao cliente para a área de dados. Atualmente cursando graduação em Ciência de Dados, aplico e expando minhas habilidades para otimizar operações e gerar insights estratégicos. Domino a automação de processos, análise de dados, a construção de soluções com IA e dashboards interativos. Sou proativo, organizado e focado em traduzir necessidades de negócio em soluções técnicas eficazes.
+                - Experiência em Surf: Assistente de Dados (CX) desde mai/2025. Desenvolveu e manteve dashboards em Streamlit/Flask e front-ends em React para KPIs de jornada do cliente. Criou automações em Python para otimizar processos manuais. Incorporou Agentes de IA (CrewAI) para automatizar pesquisa e análise. Responsável por deploy e manutenção em AWS EC2 e Linux. Usa SQL para análises.
+                - Experiência em Dasa: De 2019 a 2025, atuou como Instrutor de Treinamento e Consultor de Atendimento, iniciando a aplicação de análise de dados para mensurar a eficácia de treinamentos e qualidade de serviço.
+                - Competências: Python (Pandas, NumPy), SQL (MySQL), AWS (EC2, S3, RDS, Lambda), Power BI (DAX, Power Query), Agentes de IA (CrewAI), Desenvolvimento Web (Streamlit, Flask, React).
+                - Pergunta do usuário: ${userPrompt}
+                - Sua tarefa é responder à pergunta do usuário de forma concisa e profissional, usando as informações acima. Não use informações que não estejam no contexto fornecido.
+            `;
+            
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const payload = {
+                    contents: [{
+                        role: "user",
+                        parts: [{ text: fullContext }]
+                    }]
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    iaText.textContent = text;
+                } else {
+                    iaText.textContent = 'Não foi possível gerar uma resposta. Tente novamente.';
+                }
+            } catch (error) {
+                iaText.textContent = 'Ocorreu um erro ao conectar com a IA. Por favor, tente novamente mais tarde.';
+            } finally {
+                iaLoading.classList.add('hidden');
+                iaButton.disabled = false;
+            }
+        });
+        
         // --- RENDER FUNCTIONS ---
         function renderTimelineNav() {
             const navContainer = document.getElementById('timeline-nav');
@@ -332,11 +417,11 @@
                             grid: { color: 'rgba(0, 0, 0, 0.1)' },
                             pointLabels: { 
                                 font: { size: 12, weight: 'bold' },
-                                color: '#475569' // slate-600
+                                color: '#475569'
                             },
                             ticks: {
-                                backdropColor: 'rgba(248, 250, 252, 0.75)', // slate-50 with opacity
-                                color: '#64748b' // slate-500
+                                backdropColor: 'rgba(248, 250, 252, 0.75)',
+                                color: '#64748b'
                             }
                         }
                     },
@@ -359,12 +444,10 @@
             const timelineNav = document.getElementById('timeline-nav');
             const timelineItems = timelineNav.querySelectorAll('.timeline-item');
 
-            // Set initial state for timeline
             const firstItemId = journeyData[0].id;
             renderTimelineContent(firstItemId);
             document.getElementById(`nav-${firstItemId}`).classList.add('active');
 
-            // Timeline click events
             timelineNav.addEventListener('click', (e) => {
                 const targetItem = e.target.closest('.timeline-item');
                 if (targetItem) {
@@ -376,14 +459,12 @@
                 }
             });
 
-            // Mobile menu toggle
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
             
-            // Nav link active state on scroll
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('#nav-menu a');
 
