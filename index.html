@@ -297,7 +297,12 @@
         iaButton.addEventListener('click', async () => {
             const userPrompt = iaInput.value.trim();
             if (!userPrompt) {
-                alert('Por favor, digite sua pergunta.');
+                // Change alert() to a visual message box
+                const msgBox = document.createElement('div');
+                msgBox.className = "fixed top-5 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-xl bg-red-500 text-white z-50 animate-fade-in-down";
+                msgBox.innerHTML = "Por favor, digite sua pergunta.";
+                document.body.appendChild(msgBox);
+                setTimeout(() => msgBox.remove(), 3000);
                 return;
             }
 
@@ -311,6 +316,7 @@
                 Sua experiência e habilidades estão descritas no seguinte portfólio:
                 - Resumo: Profissional de Dados em ascensão, com uma trajetória de sucesso na transição de atendimento ao cliente para a área de dados. Atualmente cursando graduação em Ciência de Dados, aplico e expando minhas habilidades para otimizar operações e gerar insights estratégicos. Domino a automação de processos, análise de dados, a construção de soluções com IA e dashboards interativos. Sou proativo, organizado e focado em traduzir necessidades de negócio em soluções técnicas eficazes.
                 - Experiência em Surf: Assistente de Dados (CX) desde mai/2025. Desenvolveu e manteve dashboards em Streamlit/Flask e front-ends em React para KPIs de jornada do cliente. Criou automações em Python para otimizar processos manuais. Incorporou Agentes de IA (CrewAI) para automatizar pesquisa e análise. Responsável por deploy e manutenção em AWS EC2 e Linux. Usa SQL para análises.
+                - Experiência em Dasa: De 2019 a 2025, atuou como Instrutor de Treinamento e Consultor de Atendimento, iniciando a aplicação de análise de dados para mensurar a eficácia de treinamentos e qualidade de serviço.
                 - Competências: Python (Pandas, NumPy), SQL (MySQL), AWS (EC2, S3, RDS, Lambda), Power BI (DAX, Power Query), Agentes de IA (CrewAI), Desenvolvimento Web (Streamlit, Flask, React).
                 - Pergunta do usuário: ${userPrompt}
                 - Sua tarefa é responder à pergunta do usuário de forma concisa e profissional, usando as informações acima. Não use informações que não estejam no contexto fornecido.
@@ -333,14 +339,14 @@
                 });
                 const result = await response.json();
                 
-                if (result.candidates && result.candidates.length > 0) {
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content) {
                     const text = result.candidates[0].content.parts[0].text;
                     iaText.textContent = text;
                 } else {
-                    iaText.textContent = 'Não foi possível gerar uma resposta. Tente novamente.';
+                    iaText.textContent = 'Não foi possível gerar uma resposta. Tente novamente. Erro: Resposta inesperada da API.';
                 }
             } catch (error) {
-                iaText.textContent = 'Ocorreu um erro ao conectar com a IA. Por favor, tente novamente mais tarde.';
+                iaText.textContent = `Ocorreu um erro ao conectar com a IA. Por favor, tente novamente mais tarde. Erro: ${error.message}`;
             } finally {
                 iaLoading.classList.add('hidden');
                 iaButton.disabled = false;
@@ -489,5 +495,3 @@
     </script>
 </body>
 </html>
-
-
