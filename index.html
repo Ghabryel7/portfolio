@@ -240,10 +240,10 @@
 
         const skillsData = {
             radar: {
-                labels: ['Python', 'SQL', 'Cloud (AWS)', 'BI (Power BI)', 'IA (Agents)', 'Front-end'],
+                labels: ['Python', 'IA Agents', 'Cloud AWS', 'Power BI', 'SQL', 'Front-end'],
                 datasets: [{
                     label: 'Nível de Foco e Experiência',
-                    data: [90, 85, 75, 80, 80, 70],
+                    data: [65, 60, 40, 50, 30, 45],
                     backgroundColor: 'rgba(14, 165, 233, 0.2)',
                     borderColor: 'rgb(14, 165, 233)',
                     pointBackgroundColor: 'rgb(14, 165, 233)',
@@ -311,7 +311,6 @@
                 Sua experiência e habilidades estão descritas no seguinte portfólio:
                 - Resumo: Profissional de Dados em ascensão, com uma trajetória de sucesso na transição de atendimento ao cliente para a área de dados. Atualmente cursando graduação em Ciência de Dados, aplico e expando minhas habilidades para otimizar operações e gerar insights estratégicos. Domino a automação de processos, análise de dados, a construção de soluções com IA e dashboards interativos. Sou proativo, organizado e focado em traduzir necessidades de negócio em soluções técnicas eficazes.
                 - Experiência em Surf: Assistente de Dados (CX) desde mai/2025. Desenvolveu e manteve dashboards em Streamlit/Flask e front-ends em React para KPIs de jornada do cliente. Criou automações em Python para otimizar processos manuais. Incorporou Agentes de IA (CrewAI) para automatizar pesquisa e análise. Responsável por deploy e manutenção em AWS EC2 e Linux. Usa SQL para análises.
-                - Experiência em Dasa: De 2019 a 2025, atuou como Instrutor de Treinamento e Consultor de Atendimento, iniciando a aplicação de análise de dados para mensurar a eficácia de treinamentos e qualidade de serviço.
                 - Competências: Python (Pandas, NumPy), SQL (MySQL), AWS (EC2, S3, RDS, Lambda), Power BI (DAX, Power Query), Agentes de IA (CrewAI), Desenvolvimento Web (Streamlit, Flask, React).
                 - Pergunta do usuário: ${userPrompt}
                 - Sua tarefa é responder à pergunta do usuário de forma concisa e profissional, usando as informações acima. Não use informações que não estejam no contexto fornecido.
@@ -419,9 +418,11 @@
                                 font: { size: 12, weight: 'bold' },
                                 color: '#475569'
                             },
+                            beginAtZero: true,
+                            min: 0,
+                            max: 100,
                             ticks: {
-                                backdropColor: 'rgba(248, 250, 252, 0.75)',
-                                color: '#64748b'
+                                display: false
                             }
                         }
                     },
