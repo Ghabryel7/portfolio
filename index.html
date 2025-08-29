@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
     <!-- Chosen Palette: Slate Gray, Sky Blue, and White -->
     <!-- Application Structure Plan: A single-page narrative portfolio. The structure flows from a high-level summary to an interactive career timeline, a visual skills assessment, and concrete project examples. The new AI Assistant section allows for direct, dynamic interaction with the portfolio's content. This non-linear but guided structure allows recruiters to quickly grasp the key value proposition (career transition + modern tech stack) while also enabling deep dives into specific areas of interest (timeline, projects, Q&A). It's designed for exploration, not just reading. -->
     <!-- Visualization & Content Choices: Experience -> Interactive Timeline (HTML/JS) to show growth over time. Skills -> Radar Chart (Chart.js) for a quick, multi-dimensional view of core competencies, supplemented by tagged lists for detail. Projects -> Card layout (HTML/Tailwind) for clear, digestible case studies. AI Assistant -> Textarea and button triggering an LLM call to provide personalized answers based on the portfolio's content. This mix of text and interactive visuals tells a more compelling story than a static document. -->
@@ -188,17 +189,31 @@
         // --- DATA ---
         const journeyData = [
             {
-                id: 'surf',
+                id: 'surf-dados',
                 company: 'Surf',
-                role: 'Assistente de Dados (CX)',
-                period: 'mai/2025 - o momento',
-                description: 'Atuo como ponto focal de dados no time de Customer Experience, responsável por toda a frente de análise, automação e Business Intelligence.',
+                role: 'Assistente de Dados',
+                period: 'ago/2025 - o momento',
+                description: 'Atuo como profissional de dados generalista, responsável pelo desenvolvimento e implementação de soluções de análise, automação e Business Intelligence.',
                 points: [
-                    'Desenvolvimento e manutenção de dashboards estratégicos em Streamlit/Flask e front-ends em React.',
-                    'Criação de automações robustas em Python para otimizar processos manuais de tratamento de dados.',
-                    'Incorporação de Agentes de IA (CrewAI) para automatizar tarefas complexas de pesquisa e consolidação.',
-                    'Responsável pelo ciclo completo de deploy (AWS EC2, Linux) e manutenção de soluções de dados.',
-                    'Uso de SQL para consultas complexas e extração de dados para análises ad-hoc.'
+                    'Desenvolvo e mantenho dashboards em Streamlit/Flask e front-ends em React para monitoramento de KPIs e suporte à tomada de decisões estratégicas em diversas áreas de negócio.',
+                    'Crio e gerencio pipelines de automação robustos em Python para otimizar processos de tratamento de dados de diferentes fontes.',
+                    'Utilizo Agentes de IA autônomos (via CrewAI) para automatizar o ciclo de vida do desenvolvimento de software, desde a análise de requisitos e dados até a geração de código e a criação de projetos completos.',
+                    'Sou responsável pelo ciclo completo de deploy e manutenção de soluções de dados em ambiente de produção Linux na AWS.',
+                    'Utilizo SQL para realizar consultas complexas e extrair dados para análises ad-hoc.'
+                ]
+            },
+            {
+                id: 'surf-cx',
+                company: 'Surf',
+                role: 'Assistente de CX',
+                period: 'mai/2025 - ago/2025',
+                description: 'Atuei como ponto focal de dados dentro do time de Customer Experience, com foco em análise, automação e Business Intelligence para otimizar a jornada do cliente.',
+                points: [
+                    'Desenvolvi e mantive dashboards estratégicos em Streamlit/Flask e front-ends em React para monitoramento de KPIs da jornada do cliente.',
+                    'Criei automações robustas em Python para otimizar processos manuais de tratamento de dados, resultando em ganhos de eficiência e redução de erros operacionais.',
+                    'Incorporei o uso de Agentes de IA autônomos (via CrewAI) para automatizar tarefas de pesquisa, consolidação e pré-análise de informações de múltiplas fontes.',
+                    'Fui responsável pelo ciclo completo de deploy e manutenção de soluções de dados em ambiente de produção Linux na AWS EC2.',
+                    'Utilizei SQL para realizar consultas complexas e extrair dados para análises ad-hoc.'
                 ]
             },
             {
@@ -240,10 +255,10 @@
 
         const skillsData = {
             radar: {
-                labels: ['Python', 'IA Agents', 'Cloud AWS', 'Power BI', 'SQL', 'Front-end'],
+                labels: ['Python', 'IA Agents', 'Cloud AWS', 'Power BI', 'SQL', 'ML'],
                 datasets: [{
                     label: 'Nível de Foco e Experiência',
-                    data: [65, 60, 40, 50, 30, 45],
+                    data: [70, 80, 40, 40, 30, 55],
                     backgroundColor: 'rgba(14, 165, 233, 0.2)',
                     borderColor: 'rgb(14, 165, 233)',
                     pointBackgroundColor: 'rgb(14, 165, 233)',
@@ -315,7 +330,7 @@
                 Você é Ghabryel Carvalho, um profissional de dados e desenvolvedor de automação.
                 Sua experiência e habilidades estão descritas no seguinte portfólio:
                 - Resumo: Profissional de Dados em ascensão, com uma trajetória de sucesso na transição de atendimento ao cliente para a área de dados. Atualmente cursando graduação em Ciência de Dados, aplico e expando minhas habilidades para otimizar operações e gerar insights estratégicos. Domino a automação de processos, análise de dados, a construção de soluções com IA e dashboards interativos. Sou proativo, organizado e focado em traduzir necessidades de negócio em soluções técnicas eficazes.
-                - Experiência em Surf: Assistente de Dados (CX) desde mai/2025. Desenvolveu e manteve dashboards em Streamlit/Flask e front-ends em React para KPIs de jornada do cliente. Criou automações em Python para otimizar processos manuais. Incorporou Agentes de IA (CrewAI) para automatizar pesquisa e análise. Responsável por deploy e manutenção em AWS EC2 e Linux. Usa SQL para análises.
+                - Experiência em Surf: Assistente de Dados (CX) desde mai/2025. Desenvolveu e manteve dashboards em Streamlit/Flask e front-ends em React para KPIs de jornada do cliente. Criou automações em Python para otimizar processos manuais. Incorporou Agentes de IA (via CrewAI) para automatizar o ciclo de vida do desenvolvimento de software. É responsável por deploy e manutenção em AWS EC2 e Linux. Usa SQL para análises.
                 - Experiência em Dasa: De 2019 a 2025, atuou como Instrutor de Treinamento e Consultor de Atendimento, iniciando a aplicação de análise de dados para mensurar a eficácia de treinamentos e qualidade de serviço.
                 - Competências: Python (Pandas, NumPy), SQL (MySQL), AWS (EC2, S3, RDS, Lambda), Power BI (DAX, Power Query), Agentes de IA (CrewAI), Desenvolvimento Web (Streamlit, Flask, React).
                 - Pergunta do usuário: ${userPrompt}
