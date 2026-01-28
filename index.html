@@ -3,443 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghabryel Carvalho - Portfólio de Dados</title>
+    <title>Ghabryel Carvalho - AI Engineer & Solutions Architect</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Custom styles for navigation and timeline */
-        .nav-link {
-            transition: color 0.3s ease;
-        }
-        .nav-link.active {
-            color: #0ea5e9; /* text-sky-500 */
-            font-weight: 700;
-        }
-        .lang-btn.active {
-            color: #0ea5e9; /* text-sky-500 */
-            font-weight: 700;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .nav-link { transition: all 0.3s ease; }
+        .nav-link.active { color: #0ea5e9; font-weight: 700; border-bottom: 2px solid #0ea5e9; }
+        .lang-btn.active { color: #0ea5e9; font-weight: 700; }
         .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -31px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #cbd5e1; /* bg-slate-300 */
-            border: 4px solid #f8fafc; /* border-slate-50 */
-            transition: background-color 0.3s ease;
+            content: ''; position: absolute; left: -31px; top: 50%; transform: translateY(-50%);
+            width: 20px; height: 20px; border-radius: 50%; background-color: #cbd5e1;
+            border: 4px solid #f8fafc; transition: all 0.3s ease;
         }
-        html.dark .timeline-item::before {
-            background-color: #475569; /* dark:bg-slate-600 */
-            border: 4px solid #1e293b; /* dark:border-slate-800 */
-        }
-        .timeline-item.active::before {
-            background-color: #0ea5e9; /* bg-sky-500 */
-        }
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 40vh;
-            width: 80vw;
-            max-width: 500px;
-            max-height: 500px;
-        }
-        /* Hide theme icons by default */
-        #theme-icon-sun, #theme-icon-moon {
-            display: none;
-        }
-        /* Show the correct icon based on theme */
-        html.dark #theme-icon-sun {
-            display: block;
-        }
-        html:not(.dark) #theme-icon-moon {
-            display: block;
-        }
+        html.dark .timeline-item::before { background-color: #475569; border: 4px solid #1e293b; }
+        .timeline-item.active::before { background-color: #0ea5e9; box-shadow: 0 0 10px #0ea5e9; }
+        .chart-container { position: relative; margin: auto; height: 40vh; width: 80vw; max-width: 600px; }
+        #theme-icon-sun, #theme-icon-moon { display: none; }
+        html.dark #theme-icon-sun { display: block; }
+        html:not(.dark) #theme-icon-moon { display: block; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-700 dark:bg-slate-900 dark:text-slate-300 antialiased">
 
     <!-- Header & Navigation -->
-    <header id="header" class="bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-lg sticky top-0 z-50">
+    <header id="header" class="bg-slate-50/80 dark:bg-slate-900/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">Ghabryel Carvalho</h1>
+            <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100 tracking-tighter uppercase">Ghabryel <span class="text-sky-500">Soares</span></h1>
             
             <div class="flex items-center space-x-6">
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8" id="nav-menu">
-                    <a href="#inicio" class="nav-link text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.home">Início</a>
-                    <a href="#jornada" class="nav-link text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.journey">Jornada</a>
-                    <a href="#competencias" class="nav-link text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.skills">Competências</a>
-                    <a href="#projetos" class="nav-link text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.projects">Projetos</a>
-                    <a href="#ia" class="nav-link text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.assistant">Assistente de IA</a>
-                    <a href="#contato" class="nav-link text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.contact">Contato</a>
+                <nav class="hidden lg:flex space-x-8" id="nav-menu">
+                    <a href="#inicio" class="nav-link text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.home">Início</a>
+                    <a href="#jornada" class="nav-link text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.journey">Experiência</a>
+                    <a href="#competencias" class="nav-link text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.skills">Skills</a>
+                    <a href="#projetos" class="nav-link text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.projects">Projetos</a>
+                    <a href="#ia" class="nav-link text-sm uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:text-sky-500" data-i18n-key="nav.assistant">IA</a>
                 </nav>
 
-                <!-- Language & Theme Toggles -->
-                <div class="flex items-center space-x-4">
-                    <button id="lang-pt" class="lang-btn text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-sky-500">PT</button>
-                    <span class="text-slate-300 dark:text-slate-700">|</span>
-                    <button id="lang-en" class="lang-btn text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-sky-500">EN</button>
-                    
-                    <button id="theme-toggle" class="text-slate-600 dark:text-slate-400 hover:text-sky-500">
-                        <!-- Moon Icon -->
-                        <svg id="theme-icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                        <!-- Sun Icon -->
-                        <svg id="theme-icon-sun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <div class="flex items-center space-x-4 border-l pl-6 border-slate-200 dark:border-slate-700">
+                    <button id="lang-pt" class="lang-btn text-xs font-bold hover:text-sky-500">PT</button>
+                    <button id="lang-en" class="lang-btn text-xs font-bold hover:text-sky-500">EN</button>
+                    <button id="theme-toggle" class="text-slate-600 dark:text-slate-400 hover:text-sky-500 transition-transform hover:rotate-12">
+                        <svg id="theme-icon-moon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        <svg id="theme-icon-sun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-slate-800 dark:text-slate-100">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button id="mobile-menu-button" class="lg:hidden text-slate-800 dark:text-slate-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <a href="#inicio" class="block py-2 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" data-i18n-key="nav.home">Início</a>
-            <a href="#jornada" class="block py-2 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" data-i18n-key="nav.journey">Jornada</a>
-            <a href="#competencias" class="block py-2 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" data-i18n-key="nav.skills">Competências</a>
-            <a href="#projetos" class="block py-2 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" data-i18n-key="nav.projects">Projetos</a>
-            <a href="#ia" class="block py-2 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" data-i18n-key="nav.assistant">Assistente de IA</a>
-            <a href="#contato" class="block py-2 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" data-i18n-key="nav.contact">Contato</a>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+            <a href="#inicio" class="block py-4 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-50" data-i18n-key="nav.home">Início</a>
+            <a href="#jornada" class="block py-4 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-50" data-i18n-key="nav.journey">Experiência</a>
+            <a href="#competencias" class="block py-4 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-50" data-i18n-key="nav.skills">Skills</a>
+            <a href="#projetos" class="block py-4 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-50" data-i18n-key="nav.projects">Projetos</a>
+            <a href="#ia" class="block py-4 px-6 text-slate-600 dark:text-slate-400 hover:bg-slate-50" data-i18n-key="nav.assistant">IA Assistant</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6">
         <!-- Hero Section -->
-        <section id="inicio" class="py-20 md:py-32 text-center">
-            <h2 class="text-4xl md:text-6xl font-extrabold text-slate-800 dark:text-slate-100 leading-tight">
-                Data Scientist &<br>
-                <span class="text-sky-500">Automation Engineer & AI Agents Builder</span>
+        <section id="inicio" class="py-24 md:py-40 text-center">
+            <div class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-sky-600 uppercase bg-sky-100 dark:bg-sky-900/30 dark:text-sky-400 rounded-full">
+                Available for New Challenges
+            </div>
+            <h2 class="text-5xl md:text-7xl font-extrabold text-slate-800 dark:text-slate-100 leading-tight mb-8">
+                AI Engineer &<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-500">Solutions Architect</span>
             </h2>
-            <p class="mt-6 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400" data-i18n-key="hero.bio">
-                Cientista de Dados com foco em Inteligência Artificial, especializado em construir soluções end-to-end e implementar Agentes de IA orquestrados (CrewAI) para transformar desafios de negócio em projetos escaláveis e de alto impacto.
+            <p class="mt-6 max-w-3xl mx-auto text-xl text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n-key="hero.bio">
+                Especialista em construir sistemas inteligentes end-to-end, unindo arquitetura de software modular, infraestrutura em nuvem (AWS) e modelos de IA de última geração para transformar desafios complexos em produtos escaláveis.
             </p>
-            <div class="mt-8">
-                <a href="#projetos" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-600 transition-transform transform hover:scale-105" data-i18n-key="hero.cta">
-                    Ver Projetos
+            <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#projetos" class="w-full sm:w-auto bg-sky-500 text-white font-bold py-4 px-10 rounded-xl hover:bg-sky-600 transition-all shadow-lg shadow-sky-500/25" data-i18n-key="hero.cta">
+                    Explorar Projetos
+                </a>
+                <a href="https://github.com/Ghabryel7" target="_blank" class="w-full sm:w-auto border border-slate-300 dark:border-slate-700 font-bold py-4 px-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                    GitHub
                 </a>
             </div>
         </section>
 
         <!-- Journey Section -->
-        <section id="jornada" class="py-20">
-            <div class="text-center mb-16">
-                <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100" data-i18n-key="journey.title">Jornada Profissional</h3>
-                <p class="text-slate-500 dark:text-slate-400 mt-2" data-i18n-key="journey.subtitle">Uma linha do tempo da minha evolução de carreira.</p>
+        <section id="jornada" class="py-24 border-t border-slate-200 dark:border-slate-800">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div class="max-w-xl">
+                    <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4" data-i18n-key="journey.title">Trajetória Profissional</h3>
+                    <p class="text-slate-500 dark:text-slate-400" data-i18n-key="journey.subtitle">Evolução técnica focada em dados e engenharia de software.</p>
+                </div>
             </div>
             <div class="flex flex-col md:flex-row gap-12">
                 <div class="md:w-1/3">
-                    <div id="timeline-nav" class="relative border-l-2 border-slate-200 dark:border-slate-700 ml-8">
-                        <!-- Timeline items will be injected by JS -->
+                    <div id="timeline-nav" class="relative border-l-2 border-slate-200 dark:border-slate-700 ml-8 space-y-2">
+                        <!-- JS Injection -->
                     </div>
                 </div>
                 <div class="md:w-2/3">
-                    <div id="timeline-content" class="bg-white dark:bg-slate-800 p-8 rounded-xl shadow-lg dark:shadow-slate-700/50 min-h-[300px]">
-                        <!-- Content will be injected by JS -->
+                    <div id="timeline-content" class="bg-white dark:bg-slate-800/50 p-10 rounded-2xl shadow-xl dark:shadow-none border border-slate-100 dark:border-slate-800 min-h-[400px]">
+                        <!-- JS Injection -->
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section id="competencias" class="py-20">
-            <div class="text-center mb-16">
-                <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100" data-i18n-key="skills.title">Competências Técnicas</h3>
-                <p class="text-slate-500 dark:text-slate-400 mt-2" data-i18n-key="skills.subtitle">Um panorama das tecnologias e metodologias que utilizo.</p>
+        <section id="competencias" class="py-24 border-t border-slate-200 dark:border-slate-800">
+            <div class="text-center mb-20">
+                <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4" data-i18n-key="skills.title">Especialidades Técnicas</h3>
+                <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n-key="skills.subtitle">Visão equilibrada entre Desenvolvimento, IA e Operações.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="chart-container">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="chart-container order-2 lg:order-1">
                     <canvas id="skillsRadarChart"></canvas>
                 </div>
-                <div id="skills-list" class="space-y-6">
-                    <!-- Skills will be injected by JS -->
+                <div id="skills-list" class="space-y-8 order-1 lg:order-2">
+                    <!-- JS Injection -->
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projetos" class="py-20">
-            <div class="text-center mb-16">
-                <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100" data-i18n-key="projects.title">Projetos em Destaque</h3>
-                <p class="text-slate-500 dark:text-slate-400 mt-2" data-i18n-key="projects.subtitle">Exemplos práticos da aplicação das minhas competências na Surf.</p>
+        <section id="projetos" class="py-24 border-t border-slate-200 dark:border-slate-800">
+            <div class="text-center mb-20">
+                <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4" data-i18n-key="projects.title">Projetos de Arquitetura</h3>
+                <p class="text-slate-500 dark:text-slate-400" data-i18n-key="projects.subtitle">Soluções modulares e escaláveis desenvolvidas em produção.</p>
             </div>
-            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Project cards will be injected by JS -->
+            <div id="projects-grid" class="grid md:grid-cols-2 gap-8">
+                <!-- JS Injection -->
             </div>
         </section>
 
         <!-- AI Assistant Section -->
-        <section id="ia" class="py-20 bg-slate-100 dark:bg-slate-800/50 rounded-xl shadow-inner">
-            <div class="text-center mb-16">
-                <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100" data-i18n-key="ia.title">Assistente de IA ✨</h3>
-                <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl mx-auto" data-i18n-key="ia.subtitle">
-                    Faça uma pergunta sobre minha experiência, projetos ou competências, e um assistente de IA irá gerar uma resposta com base neste portfólio.
+        <section id="ia" class="py-24 bg-gradient-to-b from-white to-sky-50 dark:from-slate-900 dark:to-slate-800/50 rounded-3xl p-8 md:p-16 mb-24 border border-sky-100 dark:border-slate-800 shadow-2xl">
+            <div class="text-center mb-12">
+                <div class="inline-block p-3 bg-sky-500 text-white rounded-2xl mb-6 shadow-lg">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-4xl font-extrabold text-slate-800 dark:text-slate-100 mb-4" data-i18n-key="ia.title">Assistente de IA Ghabryel</h3>
+                <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg" data-i18n-key="ia.subtitle">
+                    O meu "Digital Twin": pergunte sobre minha arquitetura na AWS, modelos de IA ou experiência full-cycle.
                 </p>
             </div>
-            <div class="max-w-3xl mx-auto p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-700/50">
-                <textarea id="ia-input" class="w-full h-24 p-4 border border-slate-300 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none" data-i18n-key="ia.placeholder" placeholder="Ex: Me fale mais sobre seu projeto de automação com Python."></textarea>
-                <button id="ia-button" class="mt-4 w-full bg-sky-500 text-white font-bold py-3 px-8 rounded-lg hover:bg-sky-600 transition-colors transform hover:scale-105" data-i18n-key="ia.button">
-                    Gerar Resposta ✨
-                </button>
-                <div id="ia-response" class="mt-6 p-4 border border-sky-200 bg-sky-50 dark:border-sky-800 dark:bg-sky-900/50 dark:text-slate-200 rounded-lg text-slate-700 hidden">
-                    <div id="ia-loading" class="text-center hidden">
-                        <p class="text-sky-600 dark:text-sky-400" data-i18n-key="ia.loading">Gerando resposta...</p>
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <textarea id="ia-input" class="w-full h-32 p-6 text-lg border border-slate-200 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 rounded-3xl focus:ring-4 focus:ring-sky-500/20 focus:border-sky-500 outline-none transition-all shadow-inner resize-none" data-i18n-key="ia.placeholder" placeholder="Ex: Qual a arquitetura do Projeto Octopus na AWS?"></textarea>
+                    <button id="ia-button" class="absolute bottom-4 right-4 bg-sky-500 text-white font-bold py-3 px-8 rounded-2xl hover:bg-sky-600 transition-all shadow-lg hover:scale-105 active:scale-95" data-i18n-key="ia.button">
+                        Perguntar ✨
+                    </button>
+                </div>
+                <div id="ia-response" class="mt-8 p-8 border border-sky-200 bg-white/80 dark:border-sky-800/50 dark:bg-slate-800/80 backdrop-blur-sm rounded-3xl hidden shadow-xl animate-fade-in">
+                    <div id="ia-loading" class="flex items-center justify-center space-x-3 hidden">
+                        <div class="w-3 h-3 bg-sky-500 rounded-full animate-bounce"></div>
+                        <div class="w-3 h-3 bg-sky-500 rounded-full animate-bounce delay-100"></div>
+                        <div class="w-3 h-3 bg-sky-500 rounded-full animate-bounce delay-200"></div>
                     </div>
-                    <p id="ia-text"></p>
+                    <p id="ia-text" class="text-slate-700 dark:text-slate-200 leading-relaxed text-lg whitespace-pre-line"></p>
                 </div>
             </div>
         </section>
-        
+
         <!-- Contact Section -->
-        <section id="contato" class="py-20 text-center">
-             <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100" data-i18n-key="contact.title">Contato</h3>
-             <p class="text-slate-500 dark:text-slate-400 mt-2 mb-8" data-i18n-key="contact.subtitle">Vamos conversar sobre dados, automação e inovação.</p>
-             <div class="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 text-slate-600 dark:text-slate-400">
-                 <a href="mailto:ghabryellucas@hotmail.com" class="hover:text-sky-500">ghabryellucas@hotmail.com</a>
-                 <span class="hidden sm:inline">|</span>
-                 <a href="https://www.linkedin.com/in/ghabryel-lucas-4a462a171/" target="_blank" class="hover:text-sky-500">LinkedIn</a>
-                 <span class="hidden sm:inline">|</span>
-                 <p>(11) 93011-1142</p>
+        <section id="contato" class="py-24 text-center border-t border-slate-200 dark:border-slate-800">
+             <h3 class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4" data-i18n-key="contact.title">Vamos Criar o Futuro?</h3>
+             <p class="text-slate-500 dark:text-slate-400 mb-12 text-lg" data-i18n-key="contact.subtitle">Foco em soluções técnicas escaláveis e parcerias estratégicas.</p>
+             <div class="flex flex-wrap justify-center gap-6">
+                 <a href="mailto:ghabryellucas@hotmail.com" class="flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-sky-500 transition-all group">
+                     <span class="text-sky-500 group-hover:scale-110 transition-transform">✉️</span> ghabryellucas@hotmail.com
+                 </a>
+                 <a href="https://www.linkedin.com/in/ghabryel-lucas-4a462a171/" target="_blank" class="flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-sky-500 transition-all group">
+                     <span class="text-sky-500 group-hover:scale-110 transition-transform font-bold">in</span> LinkedIn
+                 </a>
+                 <div class="flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+                     <span class="text-sky-500">📞</span> (11) 93011-1142
+                 </div>
              </div>
         </section>
     </main>
 
-    <footer class="bg-slate-800 text-slate-400 text-center py-6">
-        <p data-i18n-key="footer.text">&copy; 2025 Ghabryel Carvalho. Todos os direitos reservados.</p>
+    <footer class="bg-slate-100 dark:bg-slate-900 text-slate-500 py-12 border-t border-slate-200 dark:border-slate-800 text-center">
+        <p class="mb-2 font-bold text-slate-700 dark:text-slate-300">Ghabryel Soares // 2026</p>
+        <p data-i18n-key="footer.text" class="text-sm">Desenvolvido com foco em Engenharia de Software & IA.</p>
     </footer>
 
     <script>
-        // --- I18N & DATA ---
         const content = {
             'pt-BR': {
-                nav: {
-                    home: 'Início',
-                    journey: 'Jornada',
-                    skills: 'Competências',
-                    projects: 'Projetos',
-                    assistant: 'Assistente de IA',
-                    contact: 'Contato',
-                },
-                hero: {
-                    bio: 'Cientista de Dados com foco em Inteligência Artificial, especializado em construir soluções end-to-end e implementar Agentes de IA orquestrados (CrewAI) para transformar desafios de negócio em projetos escaláveis e de alto impacto.',
-                    cta: 'Ver Projetos',
-                },
+                nav: { home: 'Início', journey: 'Experiência', skills: 'Skills', projects: 'Projetos', assistant: 'IA Assistant' },
+                hero: { bio: 'Especialista em construir sistemas inteligentes end-to-end, unindo arquitetura de software modular, infraestrutura em nuvem (AWS) e modelos de IA de última geração.', cta: 'Ver Projetos' },
                 journey: {
-                    title: 'Jornada Profissional',
-                    subtitle: 'Uma linha do tempo da minha evolução de carreira.',
+                    title: 'Trajetória Técnica', subtitle: 'Engenharia aplicada ao ciclo de vida completo da IA.',
                     data: [
-                        { id: 'surf-dados', company: 'Surf', role: 'Assistente de Dados', period: 'ago/2025 - o momento',
-                          description: 'Atuo como profissional de dados generalista, focado na implementação de soluções estratégicas que unem Data Engineering, Business Intelligence e a inovação de Agentes de IA.',
+                        { id: 'surf-ai', company: 'Surf', role: 'Engenheiro de IA & Dados', period: 'ago/2025 - Atual',
+                          description: 'Liderança técnica no desenvolvimento de arquiteturas para sistemas inteligentes e modernização de monitoramento operacional.',
                           points: [
-                            '<strong>Engenharia de Automação com IA (CrewAI):</strong> Liderança na utilização e orquestração de Agentes de IA autônomos para automatizar etapas do ciclo de vida de desenvolvimento (SDLC).',
-                            '<strong>DataOps & Pipeline Development:</strong> Criação e gestão de pipelines de automação robustos em Python para otimizar o tratamento, ingestão e harmonização de dados.',
-                            '<strong>Business Intelligence e UI/UX:</strong> Desenvolvimento e manutenção de dashboards (Streamlit/Flask, React) para monitoramento de KPIs e suporte à decisão.',
-                            '<strong>MLOps & Cloud Deployment:</strong> Responsável pelo ciclo completo de deployment e operação das soluções de dados (DataOps/MLOps) em ambiente de produção Linux na AWS (EC2).',
-                            '<strong>Análise Estratégica:</strong> Realização de consultas complexas em SQL para análises ad-hoc, investigando tendências e identificando gaps.'
+                            '<strong>Arquitetura de Sistemas (Projeto Octopus):</strong> Design de ecossistema modular na AWS (RDS, S3, EFS) para monitoração preventiva com agentes.',
+                            '<strong>Full-Cycle Development:</strong> Desenvolvimento de aplicações completas (FastAPI backend / React frontend) integradas a LLMs (GPT-4o, DeepSeek).',
+                            '<strong>Cloud & MLOps:</strong> Gestão de deploy CI/CD em ambientes Linux (EC2) e infraestrutura como código.',
+                            '<strong>Engenharia de Pipelines:</strong> Automação de DataOps em Python para ingestão e harmonização de dados de telecom.'
                           ]
                         },
-                        { id: 'surf-cx', company: 'Surf', role: 'Assistente de CX', period: 'mai/2025 - ago/2025',
-                          description: 'Atuei como ponto focal de dados dentro do time de Customer Experience (CX), com foco em análise, automação e Business Intelligence para otimizar a jornada do cliente.',
-                          points: [
-                            'Análise de dados focada na jornada do cliente para identificar pontos de atrito e oportunidades de melhoria.',
-                            'Criação de dashboards iniciais (ex: Power BI) para reportar métricas de CX à liderança.',
-                            'Ponte entre as necessidades do time de CX e as soluções técnicas de dados, traduzindo requisitos de negócio.'
-                          ]
+                        { id: 'surf-cx', company: 'Surf', role: 'Ponto Focal de Dados', period: 'mai/2025 - ago/2025',
+                          description: 'Ponte entre o negócio (Customer Experience) e as soluções técnicas de engenharia.',
+                          points: ['Automação de workflows de CX.', 'Criação de dashboards estratégicos em React/Streamlit.']
                         },
-                        { id: 'dasa-instrutor', company: 'Dasa', role: 'Instrutor de Treinamento I', period: 'out/2022 - mar/2025',
-                          description: 'Responsável pelo desenvolvimento e aplicação de treinamentos para equipes de atendimento.',
-                          points: [
-                            'Iniciei a aplicação de análise de dados para mensurar a eficácia dos treinamentos e o desempenho dos colaboradores.',
-                            'Utilizei planilhas e ferramentas de BI para criar relatórios de performance.',
-                            'Contribuí para a criação de materiais e processos que se tornaram a base para a área de Qualidade e Dados.'
-                          ]
-                        },
-                        { id: 'dasa-qualidade', company: 'Dasa', role: 'Consultor de Atendimento II (Qualidade, NPS e Dados)', period: 'abr/2022 - out/2022',
-                          description: 'Focado em análise de métricas de qualidade e satisfação do cliente, como NPS (Net Promoter Score).',
-                          points: [
-                            'Realizava a extração, análise e apresentação de dados de performance.',
-                            'Identificava os principais ofensores e oportunidades de melhoria nos processos de atendimento.',
-                            'Esta experiência foi fundamental para minha transição de carreira, solidificando meu interesse e habilidades em análise de dados.'
-                          ]
-                        },
-                        { id: 'dasa-sac', company: 'Dasa', role: 'Consultor de Atendimento I & II', period: 'fev/2019 - mar/2022',
-                          description: 'Início da jornada profissional, desenvolvendo a base de atendimento ao cliente e processos de negócio.',
-                          points: [
-                            'Atendimento direto ao cliente, resolução de problemas e suporte.',
-                            'Desenvolvimento de uma compreensão profunda das necessidades do cliente, o que hoje informa minha abordagem em dados.'
-                          ]
+                        { id: 'dasa-data', company: 'Dasa', role: 'Consultor de Dados & Qualidade', period: '2022 - 2025',
+                          description: 'Análise estratégica de performance baseada em SQL e métricas de satisfação (NPS).',
+                          points: ['Extração e tratamento de dados complexos em MySQL.', 'Identificação de ofensores operacionais via BI.']
                         }
                     ]
                 },
                 skills: {
-                    title: 'Competências Técnicas',
-                    subtitle: 'Um panorama das tecnologias e metodologias que utilizo.',
-                    chart_label: 'Nível de Foco e Experiência',
+                    title: 'Especialidades Técnicas', subtitle: 'Equilíbrio entre Engenharia, IA e Operações.',
+                    chart_label: 'Expertise Técnica',
                     list: [
-                        { category: 'Linguagens e Ferramentas', skills: ['Python (Pandas, NumPy)', 'SQL (MySQL)', 'JavaScript (React)', 'Git'] },
-                        { category: 'Visualização e BI', skills: ['Power BI (DAX, Power Query)', 'Streamlit', 'Flask', 'Dash', 'Matplotlib', 'Seaborn'] },
-                        { category: 'Cloud e Automação com IA', skills: ['AWS (EC2, S3, RDS, Lambda)', 'Linux', 'CrewAI', 'DataOps', 'MLOps'] }
+                        { category: 'IA & LLMs', skills: ['GPT-4o/o1', 'DeepSeek', 'Llama 3 (Ollama)', 'LangChain', 'RAG', 'CrewAI', 'Agentic Workflows'] },
+                        { category: 'Engenharia & Backend', skills: ['Python (FastAPI, Flask)', 'SQL (MySQL)', 'Design Modular', 'REST APIs', 'Pytest'] },
+                        { category: 'Cloud & DevOps', skills: ['AWS (S3, RDS, EFS, EC2)', 'Linux', 'Docker', 'CI/CD', 'MLOps', 'DataOps'] },
+                        { category: 'Frontend & UI', skills: ['React', 'Streamlit', 'Tailwind CSS', 'Dash'] }
                     ]
                 },
                 projects: {
-                    title: 'Projetos em Destaque',
-                    subtitle: 'Exemplos práticos da aplicação das minhas competências na Surf.',
+                    title: 'Projetos de Arquitetura', subtitle: 'Sistemas inteligentes integrados à infraestrutura.',
                     data: [
-                        { title: 'Engenharia de Automação com IA (CrewAI)', description: 'Orquestração de Agentes de IA para automatizar etapas do SDLC, desde a análise de dados até a geração de código funcional.' },
-                        { title: 'DataOps & Pipeline Development', description: 'Criação de pipelines robustos em Python para otimizar o tratamento, ingestão e harmonização de dados de múltiplas fontes.' },
-                        { title: 'MLOps & Cloud Deployment', description: 'Ciclo completo de deployment e operação de soluções de dados (DataOps/MLOps) em produção na AWS (EC2).' },
-                        { title: 'BI & Análise Estratégica', description: 'Desenvolvimento de dashboards (React, Streamlit) e consultas SQL complexas para monitoramento de KPIs e análises ad-hoc.' }
+                        { title: 'Projeto Octopus: Arquitetura IA', description: 'Plataforma modular de monitoramento preditivo. Integração de múltiplos modelos com persistência AWS RDS/EFS para monitoração alarmística.' },
+                        { title: 'NOC Tactical Intelligence', description: 'Aplicação Full-stack para monitoramento de rede em tempo real, analisando recargas e taxas de negação via modelos estatísticos e IA.' },
+                        { title: 'Automação SDLC Agentic', description: 'Orquestração de sistemas multi-agentes para automatizar o ciclo de vida de desenvolvimento, gerando código e testes funcionais.' },
+                        { title: 'Engenharia de Pipelines DataOps', description: 'Ecossistema de pipelines robustos em Python para harmonização de múltiplas fontes de dados, otimizando o time-to-insight.' }
                     ]
                 },
                 ia: {
-                    title: 'Assistente de IA ✨',
-                    subtitle: 'Faça uma pergunta sobre minha experiência, projetos ou competências, e um assistente de IA irá gerar uma resposta com base neste portfólio.',
-                    placeholder: 'Ex: Me fale mais sobre seu projeto de automação com Python.',
-                    button: 'Gerar Resposta ✨',
-                    loading: 'Gerando resposta...',
-                    context: `
-                        Você é Ghabryel Carvalho, um Data Scientist, Engenheiro de Automação e especialista em MLOps.
-                        Sua experiência e habilidades estão descritas no seguinte portfólio:
-                        - Resumo: Cientista de Dados com foco em Inteligência Artificial, especializado em construir soluções de dados end-to-end e implementar Agentes de IA orquestrados (CrewAI). Meu objetivo é transformar desafios de negócio em projetos escaláveis, eficientes e de alto impacto, automatizando o ciclo de dados e o desenvolvimento de software.
-                        - Experiência em Surf (Assistente de dados, ago/2025 - o momento): Liderança na utilização de Agentes de IA (CrewAI) para automatizar o SDLC; Criação de pipelines de DataOps em Python; Desenvolvimento de dashboards (Streamlit, React); Responsável pelo ciclo completo de MLOps e deployment em AWS (EC2); Realização de consultas SQL complexas.
-                        - Experiência em Surf (Assistente de CX, mai/2025 - ago/2025): Ponto focal de dados para a jornada do cliente, focado em análise e automação, atuando como ponte entre negócio e tecnologia.
-                        - Experiência em Dasa (2019 - mar/2025): Iniciou a aplicação de análise de dados para mensurar eficácia de treinamentos e qualidade (NPS).
-                        - Competências: Python (Pandas, NumPy, Scikit-learn), Agentes de IA (CrewAI), DataOps, MLOps, SQL (MySQL), AWS (EC2, S3, RDS, Lambda), Power BI, React, Streamlit, Linux, Git.
-                    `
+                    title: 'IA Ghabryel ✨', subtitle: 'Digital Twin: pergunte sobre minha arquitetura, projetos ou experiência.',
+                    placeholder: 'Ex: Como o Projeto Octopus utiliza a AWS?', button: 'Perguntar ✨', loading: 'Processando...',
+                    context: `Você é o Digital Twin do Ghabryel Soares, Engenheiro de IA. Experiência: 
+                    1. Surf (Engenheiro de IA): Criou o Projeto Octopus (arquitetura modular AWS RDS/S3/EFS). Desenvolve Full-Cycle (FastAPI, React). Usa LLMs (GPT-4o, DeepSeek, Ollama). 
+                    2. Dasa: Especialista em SQL e Qualidade. 
+                    Tecnologias: Python, SQL, React, MLOps, CI/CD, Pytest, Docker, Linux, AWS completa.`
                 },
-                contact: {
-                    title: 'Contato',
-                    subtitle: 'Vamos conversar sobre dados, automação e inovação.',
-                },
-                footer: {
-                    text: '&copy; 2025 Ghabryel Carvalho. Todos os direitos reservados.'
-                }
+                contact: { title: 'Vamos Criar o Futuro?', subtitle: 'Foco em soluções escaláveis.' },
+                footer: { text: 'Desenvolvido com foco em Engenharia de Software & IA.' }
             },
             'en': {
-                nav: {
-                    home: 'Home',
-                    journey: 'Journey',
-                    skills: 'Skills',
-                    projects: 'Projects',
-                    assistant: 'AI Assistant',
-                    contact: 'Contact',
-                },
-                hero: {
-                    bio: 'Data Scientist focused on Artificial Intelligence, specializing in building end-to-end solutions and implementing orchestrated AI Agents (CrewAI) to transform business challenges into scalable, high-impact projects.',
-                    cta: 'View Projects',
-                },
+                nav: { home: 'Home', journey: 'Experience', skills: 'Skills', projects: 'Projects', assistant: 'AI Assistant' },
+                hero: { bio: 'Specialist in building end-to-end intelligent systems, combining modular software architecture, cloud infrastructure (AWS), and cutting-edge AI models.', cta: 'Explore Projects' },
                 journey: {
-                    title: 'Professional Journey',
-                    subtitle: 'A timeline of my career evolution.',
+                    title: 'Technical Path', subtitle: 'Engineering applied to the full AI lifecycle.',
                     data: [
-                        { id: 'surf-dados', company: 'Surf', role: 'Data Assistant', period: 'Aug/2025 - Present',
-                          description: 'Acting as a generalist data professional, focused on implementing strategic solutions that unite Data Engineering, Business Intelligence, and AI Agent innovation.',
+                        { id: 'surf-ai', company: 'Surf', role: 'AI & Data Engineer', period: 'Aug/2025 - Present',
+                          description: 'Technical lead in developing architectures for intelligent systems and modernizing operational monitoring.',
                           points: [
-                            '<strong>AI Automation Engineering (CrewAI):</strong> Leadership in using and orchestrating autonomous AI Agents to automate steps of the Software Development Life Cycle (SDLC).',
-                            '<strong>DataOps & Pipeline Development:</strong> Creation and management of robust automation pipelines in Python to optimize data processing, ingestion, and harmonization.',
-                            '<strong>Business Intelligence & UI/UX:</strong> Development and maintenance of dashboards (Streamlit/Flask, React) for KPI monitoring and decision support.',
-                            '<strong>MLOps & Cloud Deployment:</strong> Responsible for the complete deployment and operation cycle of data solutions (DataOps/MLOps) in a Linux production environment on AWS (EC2).',
-                            '<strong>Strategic Analysis:</strong> Performing complex SQL queries for ad-hoc analyses, investigating trends, and identifying gaps.'
+                            '<strong>Systems Architecture (Octopus):</strong> Modular ecosystem design on AWS (RDS, S3, EFS) for preventive monitoring.',
+                            '<strong>Full-Cycle Development:</strong> Building complete apps (FastAPI backend / React frontend) integrated with LLMs (GPT-4o, DeepSeek).',
+                            '<strong>Cloud & MLOps:</strong> CI/CD deployment management in Linux (EC2) and infrastructure as code.',
+                            '<strong>Pipeline Engineering:</strong> DataOps automation in Python for ingestion and harmonization of telecom data.'
                           ]
                         },
-                        { id: 'surf-cx', company: 'Surf', role: 'CX Assistant', period: 'May/2025 - Aug/2025',
-                          description: 'Acted as the data focal point within the Customer Experience (CX) team, focusing on analysis, automation, and Business Intelligence to optimize the customer journey.',
-                          points: [
-                            'Customer journey-focused data analysis to identify friction points and improvement opportunities.',
-                            'Creation of initial dashboards (e.g., Power BI) to report CX metrics to leadership.',
-                            'Bridged the gap between CX team needs and technical data solutions, translating business requirements.'
-                          ]
+                        { id: 'surf-cx', company: 'Surf', role: 'Data Focal Point', period: 'May/2025 - Aug/2025',
+                          description: 'Bridging the gap between Business (CX) and technical engineering solutions.',
+                          points: ['CX workflow automation.', 'Strategic dashboard creation in React/Streamlit.']
                         },
-                        { id: 'dasa-instrutor', company: 'Dasa', role: 'Training Instructor I', period: 'Oct/2022 - Mar/2025',
-                          description: 'Responsible for developing and delivering training for customer service teams.',
-                          points: [
-                            'Initiated the use of data analysis to measure training effectiveness and employee performance.',
-                            'Used spreadsheets and BI tools to create performance reports.',
-                            'Contributed to creating materials and processes that became the foundation for the Quality and Data area.'
-                          ]
-                        },
-                        { id: 'dasa-qualidade', company: 'Dasa', role: 'Customer Service Consultant II (Quality, NPS & Data)', period: 'Apr/2022 - Oct/2022',
-                          description: 'Focused on analyzing quality and customer satisfaction metrics, such as NPS (Net Promoter Score).',
-                          points: [
-                            'Performed extraction, analysis, and presentation of performance data.',
-                            'Identified key detractors and improvement opportunities in service processes.',
-                            'This experience was fundamental for my career transition, solidifying my interest and skills in data analysis.'
-                          ]
-                        },
-                        { id: 'dasa-sac', company: 'Dasa', role: 'Customer Service Consultant I & II', period: 'Feb/2019 - Mar/2022',
-                          description: 'Start of the professional journey, developing a foundation in customer service and business processes.',
-                          points: [
-                            'Direct customer service, problem-solving, and support.',
-                            'Developed a deep understanding of customer needs, which now informs my data-driven approach.'
-                          ]
+                        { id: 'dasa-data', company: 'Dasa', role: 'Data & Quality Consultant', period: '2022 - 2025',
+                          description: 'Strategic performance analysis based on SQL and satisfaction metrics (NPS).',
+                          points: ['Complex data extraction in MySQL.', 'Operational detractor identification via BI.']
                         }
                     ]
                 },
                 skills: {
-                    title: 'Technical Skills',
-                    subtitle: 'An overview of the technologies and methodologies I use.',
-                    chart_label: 'Level of Focus and Experience',
+                    title: 'Technical Specialties', subtitle: 'Balance between Engineering, AI, and Operations.',
+                    chart_label: 'Technical Expertise',
                     list: [
-                        { category: 'Languages and Tools', skills: ['Python (Pandas, NumPy)', 'SQL (MySQL)', 'JavaScript (React)', 'Git'] },
-                        { category: 'Visualization & BI', skills: ['Power BI (DAX, Power Query)', 'Streamlit', 'Flask', 'Dash', 'Matplotlib', 'Seaborn'] },
-                        { category: 'Cloud & AI Automation', skills: ['AWS (EC2, S3, RDS, Lambda)', 'Linux', 'CrewAI', 'DataOps', 'MLOps'] }
+                        { category: 'AI & LLMs', skills: ['GPT-4o/o1', 'DeepSeek', 'Llama 3 (Ollama)', 'LangChain', 'RAG', 'CrewAI', 'Agentic Workflows'] },
+                        { category: 'Engineering & Backend', skills: ['Python (FastAPI, Flask)', 'SQL (MySQL)', 'Modular Design', 'REST APIs', 'Pytest'] },
+                        { category: 'Cloud & DevOps', skills: ['AWS (S3, RDS, EFS, EC2)', 'Linux', 'Docker', 'CI/CD', 'MLOps', 'DataOps'] },
+                        { category: 'Frontend & UI', skills: ['React', 'Streamlit', 'Tailwind CSS', 'Dash'] }
                     ]
                 },
                 projects: {
-                    title: 'Featured Projects',
-                    subtitle: 'Practical examples of my skills applied at Surf.',
+                    title: 'Architecture Projects', subtitle: 'Intelligent systems integrated with infra.',
                     data: [
-                        { title: 'AI Automation Engineering (CrewAI)', description: 'Orchestration of AI Agents to automate SDLC steps, from data analysis to functional code generation.' },
-                        { title: 'DataOps & Pipeline Development', description: 'Creation of robust Python pipelines to optimize data processing, ingestion, and harmonization from multiple sources.' },
-                        { title: 'MLOps & Cloud Deployment', description: 'Full lifecycle management of deploying and operating data solutions (DataOps/MLOps) in production on AWS (EC2).' },
-                        { title: 'BI & Strategic Analysis', description: 'Development of dashboards (React, Streamlit) and complex SQL queries for KPI monitoring and ad-hoc analyses.' }
+                        { title: 'Project Octopus: AI Arch', description: 'Modular predictive platform. Multi-model integration with AWS RDS/EFS persistence for alarming.' },
+                        { title: 'NOC Tactical Intelligence', description: 'Full-stack app for real-time network monitoring, analyzing recharge and denial rates via AI.' },
+                        { title: 'Agentic SDLC Automation', description: 'Multi-agent orchestration to automate the development lifecycle, generating code and tests.' },
+                        { title: 'DataOps Pipelines', description: 'Robust Python pipeline ecosystem for multi-source data harmonization and time-to-insight optimization.' }
                     ]
                 },
                 ia: {
-                    title: 'AI Assistant ✨',
-                    subtitle: 'Ask a question about my experience, projects, or skills, and an AI assistant will generate an answer based on this portfolio.',
-                    placeholder: 'Ex: Tell me more about your Python automation project.',
-                    button: 'Generate Answer ✨',
-                    loading: 'Generating answer...',
-                    context: `
-                        You are Ghabryel Carvalho, a Data Scientist, Automation Engineer, and MLOps specialist.
-                        Your experience and skills are described in the following portfolio:
-                        - Summary: Data Scientist focused on Artificial Intelligence, specializing in building end-to-end data solutions and implementing orchestrated AI Agents (CrewAI). My goal is to transform business challenges into scalable, efficient, and high-impact projects by automating the data lifecycle and software development.
-                        - Experience at Surf (Data Assistant, Aug/2025 - Present): Leading the use of AI Agents (CrewAI) to automate the SDLC; Building DataOps pipelines in Python; Developing dashboards (Streamlit, React); Responsible for the full MLOps cycle and deployment on AWS (EC2); Performing complex SQL queries.
-                        - Experience at Surf (CX Assistant, May/2025 - Aug/2025): Acted as the data focal point for the customer journey, focusing on analysis and automation, bridging business and technology.
-                        - Experience at Dasa (2019 - Mar/2025): Initiated the use of data analysis to measure training effectiveness and service quality (NPS).
-                        - Skills: Python (Pandas, NumPy, Scikit-learn), AI Agents (CrewAI), DataOps, MLOps, SQL (MySQL), AWS (EC2, S3, RDS, Lambda), Power BI, React, Streamlit, Linux, Git.
-                    `
+                    title: 'AI Ghabryel ✨', subtitle: 'Digital Twin: ask about my architecture, projects, or experience.',
+                    placeholder: 'Ex: How does Project Octopus use AWS?', button: 'Ask ✨', loading: 'Processing...',
+                    context: `You are the Digital Twin of Ghabryel Soares, AI Engineer. Experience: 
+                    1. Surf (AI Engineer): Created Project Octopus (AWS RDS/S3/EFS modular arch). Full-Cycle (FastAPI, React). LLMs (GPT-4o, DeepSeek, Ollama). 
+                    2. Dasa: SQL & Quality Expert. 
+                    Stack: Python, SQL, React, MLOps, CI/CD, Pytest, Docker, Linux, Full AWS.`
                 },
-                contact: {
-                    title: 'Contact',
-                    subtitle: 'Let\'s talk about data, automation, and innovation.',
-                },
-                footer: {
-                    text: '&copy; 2025 Ghabryel Carvalho. All rights reserved.'
-                }
+                contact: { title: 'Create the Future?', subtitle: 'Focus on scalable solutions.' },
+                footer: { text: 'Built with focus on Software Engineering & AI.' }
             }
         };
-        
-        // --- CHART & RENDER ---
+
         let currentLang = 'pt-BR';
         let chartInstance = null;
         const skillsRadarData = {
-            labels: ['Python', 'IA Agents', 'Cloud AWS', 'Power BI', 'SQL', 'ML'],
+            labels: ['IA Engineering', 'Cloud / AWS', 'Backend (FastAPI)', 'MLOps', 'SQL', 'Frontend'],
             datasets: [{
-                data: [70, 80, 40, 40, 30, 55],
+                data: [95, 85, 90, 80, 75, 70],
                 backgroundColor: 'rgba(14, 165, 233, 0.2)',
                 borderColor: 'rgb(14, 165, 233)',
                 pointBackgroundColor: 'rgb(14, 165, 233)',
@@ -449,305 +320,182 @@
             }]
         };
 
-        // Helper function to get nested object property
         function getNestedProperty(obj, path) {
-            return path.split('.').reduce((acc, key) => (acc && acc[key] !== 'undefined') ? acc[key] : undefined, obj);
+            return path.split('.').reduce((acc, key) => (acc && acc[key] !== undefined) ? acc[key] : undefined, obj);
         }
 
         function renderContent() {
             const texts = content[currentLang];
             if (!texts) return;
 
-            // 1. Update all simple text elements
-            document.querySelectorAll('[data-i18n-key]').forEach(element => {
-                const key = element.dataset.i18nKey;
+            document.querySelectorAll('[data-i18n-key]').forEach(el => {
+                const key = el.dataset.i18nKey;
                 const text = getNestedProperty(texts, key);
-                if (text) {
-                    if (element.tagName === 'TEXTAREA' || element.tagName === 'INPUT') {
-                        element.placeholder = text;
-                    } else {
-                        element.innerHTML = text; // Use innerHTML to support <strong> tags
-                    }
-                }
+                if (text) el.tagName === 'TEXTAREA' ? el.placeholder = text : el.innerHTML = text;
             });
 
-            // 2. Render dynamic sections
             renderTimelineNav(texts.journey.data);
-            // Select the first item by default
             if (texts.journey.data.length > 0) {
                 const firstId = texts.journey.data[0].id;
                 renderTimelineContent(firstId, texts.journey.data);
-                document.querySelectorAll('.timeline-item').forEach(item => item.classList.remove('active'));
-                const firstNavItem = document.getElementById(`nav-${firstId}`);
-                if (firstNavItem) {
-                    firstNavItem.classList.add('active');
-                }
+                document.querySelectorAll('.timeline-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.id === firstId) item.classList.add('active');
+                });
             }
             
             renderSkillsList(texts.skills.list);
             renderProjects(texts.projects.data);
             renderSkillsChart(texts.skills.chart_label);
-
-            // 3. Update active language button
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`lang-${currentLang.split('-')[0]}`).classList.add('active');
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.id === `lang-${currentLang.split('-')[0]}`) btn.classList.add('active');
+            });
         }
 
-        function renderTimelineNav(journeyData) {
-            const navContainer = document.getElementById('timeline-nav');
-            navContainer.innerHTML = journeyData.map(item => `
-                <div id="nav-${item.id}" class="timeline-item relative pl-8 py-4 cursor-pointer" data-id="${item.id}">
-                    <h4 class="font-bold text-slate-700 dark:text-slate-200">${item.role}</h4>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">${item.company} | ${item.period}</p>
+        function renderTimelineNav(data) {
+            const container = document.getElementById('timeline-nav');
+            container.innerHTML = data.map(item => `
+                <div class="timeline-item relative pl-8 py-6 cursor-pointer group transition-all" data-id="${item.id}">
+                    <h4 class="font-bold text-slate-700 dark:text-slate-200 group-hover:text-sky-500">${item.role}</h4>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-widest mt-1">${item.company} // ${item.period}</p>
                 </div>
             `).join('');
         }
 
-        function renderTimelineContent(itemId, journeyData) {
-            const contentContainer = document.getElementById('timeline-content');
-            const item = journeyData.find(d => d.id === itemId);
+        function renderTimelineContent(id, data) {
+            const container = document.getElementById('timeline-content');
+            const item = data.find(d => d.id === id);
             if (!item) return;
-
-            contentContainer.innerHTML = `
-                <h3 class="text-2xl font-bold text-sky-500">${item.role}</h3>
-                <p class="text-slate-600 dark:text-slate-400 font-medium mb-4">${item.company} (${item.period})</p>
-                <p class="text-slate-500 dark:text-slate-400 mb-6">${item.description}</p>
-                <ul class="space-y-2 text-slate-600 dark:text-slate-300">
-                    ${item.points.map(point => `
-                        <li class="flex items-start">
-                            <svg class="w-5 h-5 text-sky-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span>${point}</span>
-                        </li>
-                    `).join('')}
-                </ul>
+            container.innerHTML = `
+                <div class="animate-fade-in">
+                    <h3 class="text-3xl font-extrabold text-sky-500 mb-2">${item.role}</h3>
+                    <p class="text-slate-500 dark:text-slate-400 font-bold mb-6 italic">${item.company} — ${item.period}</p>
+                    <p class="text-slate-600 dark:text-slate-300 text-lg leading-relaxed mb-8">${item.description}</p>
+                    <ul class="space-y-4">
+                        ${item.points.map(p => `
+                            <li class="flex items-start gap-4">
+                                <span class="bg-sky-500/10 text-sky-500 p-1 rounded-lg mt-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </span>
+                                <span class="text-slate-600 dark:text-slate-400 leading-snug">${p}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
             `;
         }
-        
-        function renderSkillsList(skillsList) {
-            const listContainer = document.getElementById('skills-list');
-            listContainer.innerHTML = skillsList.map(category => `
-                <div>
-                    <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-3 text-lg">${category.category}</h4>
+
+        function renderSkillsList(list) {
+            document.getElementById('skills-list').innerHTML = list.map(cat => `
+                <div class="bg-white dark:bg-slate-800/30 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-3">
+                        <span class="w-2 h-6 bg-sky-500 rounded-full"></span>${cat.category}
+                    </h4>
                     <div class="flex flex-wrap gap-2">
-                        ${category.skills.map(skill => `
-                            <span class="bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full">${skill}</span>
-                        `).join('')}
+                        ${cat.skills.map(s => `<span class="bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-200 text-xs font-bold px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-600">${s}</span>`).join('')}
                     </div>
                 </div>
             `).join('');
         }
-        
-        function renderProjects(projectsData) {
-            const projectsContainer = document.getElementById('projects-grid');
-            projectsContainer.innerHTML = projectsData.map(project => `
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md dark:shadow-slate-700/50 hover:shadow-xl dark:hover:shadow-sky-700/50 hover:-translate-y-1 transition-all">
-                    <h4 class="font-bold text-slate-800 dark:text-slate-100 text-lg mb-2">${project.title}</h4>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm">${project.description}</p>
+
+        function renderProjects(data) {
+            document.getElementById('projects-grid').innerHTML = data.map(p => `
+                <div class="group bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 hover:border-sky-500 transition-all shadow-sm hover:shadow-2xl">
+                    <h4 class="font-bold text-slate-800 dark:text-slate-100 text-xl mb-4 group-hover:text-sky-500">${p.title}</h4>
+                    <p class="text-slate-500 dark:text-slate-400 leading-relaxed">${p.description}</p>
+                    <div class="mt-6 flex items-center gap-2 text-sky-500 font-bold text-sm">
+                        <span>Ver Arquitetura</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </div>
                 </div>
             `).join('');
         }
 
         function renderSkillsChart(label) {
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
+            if (chartInstance) chartInstance.destroy();
             const ctx = document.getElementById('skillsRadarChart').getContext('2d');
             const isDark = document.documentElement.classList.contains('dark');
-            const gridColor = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)';
-            const labelColor = isDark ? '#cbd5e1' : '#475569'; // slate-300 : slate-600
-
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+            const labelColor = isDark ? '#94a3b8' : '#64748b';
             skillsRadarData.datasets[0].label = label;
-
             chartInstance = new Chart(ctx, {
                 type: 'radar',
                 data: skillsRadarData,
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatio: false,
                     scales: {
                         r: {
-                            angleLines: { color: gridColor },
-                            grid: { color: gridColor },
-                            pointLabels: { 
-                                font: { size: 12, weight: 'bold' },
-                                color: labelColor
-                            },
-                            beginAtZero: true,
-                            min: 0,
-                            max: 100,
-                            ticks: {
-                                display: false,
-                                backdropColor: 'transparent'
-                            }
+                            angleLines: { color: gridColor }, grid: { color: gridColor },
+                            pointLabels: { font: { size: 11, weight: '800' }, color: labelColor },
+                            beginAtZero: true, min: 0, max: 100, ticks: { display: false }
                         }
                     },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
         }
-        
-        // --- EVENT LISTENERS & INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. Set Theme
-            const themeToggle = document.getElementById('theme-toggle');
+
+        window.onload = () => {
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
             }
-
-            themeToggle.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-                if (document.documentElement.classList.contains('dark')) {
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    localStorage.setItem('theme', 'light');
-                }
-                // Re-render chart with new colors
-                renderSkillsChart(content[currentLang].skills.chart_label);
-            });
-
-            // 2. Set Language
-            const langPtBtn = document.getElementById('lang-pt');
-            const langEnBtn = document.getElementById('lang-en');
-            const userLang = localStorage.getItem('language') || navigator.language || 'pt-BR';
-            
-            currentLang = userLang.startsWith('en') ? 'en' : 'pt-BR';
-            document.documentElement.lang = currentLang;
             renderContent();
 
-            langPtBtn.addEventListener('click', () => {
-                currentLang = 'pt-BR';
-                document.documentElement.lang = currentLang;
-                localStorage.setItem('language', currentLang);
-                renderContent();
-            });
+            document.getElementById('theme-toggle').onclick = () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+                renderSkillsChart(content[currentLang].skills.chart_label);
+            };
 
-            langEnBtn.addEventListener('click', () => {
-                currentLang = 'en';
-                document.documentElement.lang = currentLang;
-                localStorage.setItem('language', currentLang);
-                renderContent();
-            });
+            document.getElementById('lang-pt').onclick = () => { currentLang = 'pt-BR'; renderContent(); };
+            document.getElementById('lang-en').onclick = () => { currentLang = 'en'; renderContent(); };
 
-            // 3. AI Assistant Logic
-            const iaInput = document.getElementById('ia-input');
-            const iaButton = document.getElementById('ia-button');
-            const iaResponse = document.getElementById('ia-response');
-            const iaLoading = document.getElementById('ia-loading');
-            const iaText = document.getElementById('ia-text');
+            document.getElementById('timeline-nav').onclick = (e) => {
+                const item = e.target.closest('.timeline-item');
+                if (!item) return;
+                renderTimelineContent(item.dataset.id, content[currentLang].journey.data);
+                document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            };
 
-            iaButton.addEventListener('click', async () => {
-                const userPrompt = iaInput.value.trim();
-                if (!userPrompt) {
-                    const msgBox = document.createElement('div');
-                    msgBox.className = "fixed top-5 left-1/2 -translate-x-1/2 p-4 rounded-lg shadow-xl bg-red-500 text-white z-50 animate-fade-in-down";
-                    msgBox.innerHTML = currentLang === 'en' ? 'Please enter your question.' : 'Por favor, digite sua pergunta.';
-                    document.body.appendChild(msgBox);
-                    setTimeout(() => msgBox.remove(), 3000);
-                    return;
-                }
+            document.getElementById('mobile-menu-button').onclick = () => document.getElementById('mobile-menu').classList.toggle('hidden');
 
-                iaResponse.classList.remove('hidden');
-                iaText.textContent = '';
-                iaLoading.classList.remove('hidden');
-                iaButton.disabled = true;
+            document.getElementById('ia-button').onclick = async () => {
+                const input = document.getElementById('ia-input');
+                const btn = document.getElementById('ia-button');
+                const resp = document.getElementById('ia-response');
+                const text = document.getElementById('ia-text');
+                const loader = document.getElementById('ia-loading');
+                const prompt = input.value.trim();
 
-                // Build context based on current language
-                const iaContent = content[currentLang].ia;
-                const fullContext = `
-                    ${iaContent.context}
-                    - Pergunta do usuário: ${userPrompt}
-                    - Sua tarefa é responder à pergunta do usuário de forma concisa e profissional, usando as informações acima. Responda no idioma: ${currentLang}.
-                `;
-                
+                if (!prompt) return;
+
+                resp.classList.remove('hidden');
+                text.textContent = '';
+                loader.classList.remove('hidden');
+                btn.disabled = true;
+
+                const fullPrompt = `${content[currentLang].ia.context}\n\nPergunta: ${prompt}\n\nResponda como se fosse o Ghabryel, de forma técnica porém acessível.`;
+
                 try {
-                    const apiKey = ""; // API key is managed by the execution environment
+                    const apiKey = "";
                     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                    const payload = {
-                        contents: [{
-                            role: "user",
-                            parts: [{ text: fullContext }]
-                        }]
-                    };
-
-                    const response = await fetch(apiUrl, {
+                    const res = await fetch(apiUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify({ contents: [{ parts: [{ text: fullPrompt }] }] })
                     });
-                    const result = await response.json();
-                    
-                    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content) {
-                        const text = result.candidates[0].content.parts[0].text;
-                        iaText.textContent = text;
-                    } else {
-                        iaText.textContent = currentLang === 'en' ? 'Could not generate a response. Please try again. Error: Unexpected API response.' : 'Não foi possível gerar uma resposta. Tente novamente. Erro: Resposta inesperada da API.';
-                    }
-                } catch (error) {
-                    iaText.textContent = `${currentLang === 'en' ? 'An error occurred while connecting to the AI. Please try again later. Error:' : 'Ocorreu um erro ao conectar com a IA. Por favor, tente novamente mais tarde. Erro:'} ${error.message}`;
+                    const data = await res.json();
+                    text.textContent = data.candidates[0].content.parts[0].text;
+                } catch (e) {
+                    text.textContent = "Erro na conexão. Tente novamente.";
                 } finally {
-                    iaLoading.classList.add('hidden');
-                    iaButton.disabled = false;
+                    loader.classList.add('hidden');
+                    btn.disabled = false;
                 }
-            });
-
-            // 4. Other Listeners
-            const timelineNav = document.getElementById('timeline-nav');
-            timelineNav.addEventListener('click', (e) => {
-                const targetItem = e.target.closest('.timeline-item');
-                if (targetItem) {
-                    const itemId = targetItem.dataset.id;
-                    renderTimelineContent(itemId, content[currentLang].journey.data);
-                    
-                    document.querySelectorAll('.timeline-item').forEach(item => item.classList.remove('active'));
-                    targetItem.classList.add('active');
-                }
-            });
-
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('#nav-menu a');
-            const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
-
-            const allNavLinks = [...navLinks, ...mobileNavLinks];
-
-            window.addEventListener('scroll', () => {
-                let current = 'inicio';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 70) { // Adjusted offset for sticky header
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                allNavLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === current) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-             // Close mobile menu on link click
-             mobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
-
-        });
+            };
+        };
     </script>
 </body>
 </html>
-
